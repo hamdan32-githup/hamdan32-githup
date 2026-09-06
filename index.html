@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌿Full Life Store — Grocery, Pharmacy, Fashion & Footwear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">🌿 Full Life <span class="tag">Store</span></div>
+  <ul class="nav-links">
+    <li><a href="#cats" onclick="gs('cats');return false">Shop</a></li>
+    <li><a href="#prods" onclick="gs('prods');return false">Products</a></li>
+    <li><a href="#offers" onclick="gs('offers');return false">Deals</a></li>
+    <li><a href="#loyalty" onclick="gs('loyalty');return false">Rewards</a></li>
+  </ul>
+  <div class="nav-btns">
+    <button class="nbtn nbtn-w" onclick="showModal('loginModal')">Log in</button>
+    <button class="nbtn nbtn-o" onclick="openCart()">🛒 Cart <span class="cart-badge" id="cartCount">0</span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">☀ TODAY'S MARKET · KARACHI</div>
+    <h1>Everything you need,<br><em>delivered fresh.</em></h1>
+    <p>Groceries, medicine, clothing and shoes — one basket, one delivery. Full Life brings the whole bazaar to your door.</p>
+    <div class="hero-btns">
+      <button class="hbtn-p" onclick="gs('cats')">Browse the market</button>
+      <button class="hbtn-s" onclick="gs('offers')">See today's deals</button>
+    </div>
+    <div class="hero-tape">
+      <span>🥦 <strong>50K+</strong> customers</span>
+      <span>📦 <strong>10K+</strong> products</span>
+      <span>⏱ <strong>30 min</strong> delivery</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stall" onclick="filterCat('food')"><span class="stall-icon">🥬</span><div class="stall-txt"><strong>Grocery</strong><span>Fruit, veg, dairy & meat</span></div></div>
+    <div class="stall" onclick="filterCat('pharma')"><span class="stall-icon">💊</span><div class="stall-txt"><strong>Pharmacy</strong><span>Medicine & health</span></div></div>
+    <div class="stall" onclick="filterCat('clothes')"><span class="stall-icon">👗</span><div class="stall-txt"><strong>Clothes</strong><span>Men, women & kids</span></div></div>
+    <div class="stall" onclick="filterCat('shoes')"><span class="stall-icon">👟</span><div class="stall-txt"><strong>Shoes</strong><span>Sneakers & sandals</span></div></div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="section" id="cats">
+  <div class="sec-tag">Browse by</div>
+  <div class="sec-title">Shop categories</div>
+  <div class="sec-sub">Pick a stall to explore hundreds of products.</div>
+  <div class="cat-grid">
+    <div class="cat-card food" onclick="filterCat('food')"><span class="cat-icon">🥬</span><h3>Grocery</h3><p>Fruit, veg, dairy, meat</p></div>
+    <div class="cat-card pharma" onclick="filterCat('pharma')"><span class="cat-icon">💊</span><h3>Pharmacy</h3><p>Medicine & health</p></div>
+    <div class="cat-card clothes" onclick="filterCat('clothes')"><span class="cat-icon">👕</span><h3>Clothes</h3><p>Men, women & kids</p></div>
+    <div class="cat-card shoes" onclick="filterCat('shoes')"><span class="cat-icon">👟</span><h3>Shoes</h3><p>Sneakers & sandals</p></div>
+    <div class="cat-card all" onclick="filterCat('all')"><span class="cat-icon">✨</span><h3>All items</h3><p>View everything</p></div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="section section-deep" id="prods">
+  <div class="sec-tag">Featured</div>
+  <div class="sec-title">Top products</div>
+  <div class="sec-sub">Fresh picks and pantry staples, restocked daily.</div>
+  <div class="tab-row" id="tabRow">
+    <button class="tab active" onclick="setTab(this,'all')">All</button>
+    <button class="tab" onclick="setTab(this,'food')">🥦 Food</button>
+    <button class="tab" onclick="setTab(this,'pharma')">💊 Pharmacy</button>
+    <button class="tab" onclick="setTab(this,'clothes')">👗 Clothes</button>
+    <button class="tab" onclick="setTab(this,'shoes')">👟 Shoes</button>
+  </div>
+  <div class="prod-grid" id="prodGrid"></div>
+</div>
+
+<!-- OFFERS -->
+<div class="section" id="offers">
+  <div class="sec-tag">Limited time</div>
+  <div class="sec-title">Today's deals</div>
+  <div class="sec-sub">Grab these before they're gone.</div>
+  <div class="offer-card" style="background:linear-gradient(100deg,var(--chili),var(--marigold-deep))">
+    <div><h3>Weekend sale — 40% off</h3><p>All fresh vegetables & fruits</p></div>
+    <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+      <div class="offer-code-box">FRESH40</div>
+      <button class="offer-copy-btn" style="color:var(--chili)" onclick="copyCode('FRESH40')">Copy code</button>
+    </div>
+  </div>
+  <div class="offer-card" style="background:linear-gradient(100deg,var(--teal),var(--plum))">
+    <div><h3>Health bundle — 25% off</h3><p>Buy any 2 pharmacy products</p></div>
+    <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+      <div class="offer-code-box">HEALTH25</div>
+      <button class="offer-copy-btn" style="color:var(--teal)" onclick="copyCode('HEALTH25')">Copy code</button>
+    </div>
+  </div>
+  <div class="offer-card" style="background:linear-gradient(100deg,var(--jade-deep),var(--jade-bright))">
+    <div><h3>Shoe fest — buy 1 get 1 free</h3><p>All sneakers & sandals, limited pairs</p></div>
+    <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+      <div class="offer-code-box">SHOE2X</div>
+      <button class="offer-copy-btn" style="color:var(--jade-deep)" onclick="copyCode('SHOE2X')">Copy code</button>
+    </div>
+  </div>
+  <div class="offer-card" style="background:linear-gradient(100deg,#8a2f63,var(--plum))">
+    <div><h3>Fashion week — 30% off</h3><p>All women's clothing, 3 days only</p></div>
+    <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+      <div class="offer-code-box">FASHION30</div>
+      <button class="offer-copy-btn" style="color:#8a2f63" onclick="copyCode('FASHION30')">Copy code</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOYALTY (replaces fake bank card) -->
+<div class="loyalty-wrap" id="loyalty">
+  <div class="sec-tag" style="color:var(--marigold)">Your wallet</div>
+  <div class="sec-title" style="color:#fff">Full Life Rewards</div>
+  <p class="loyalty-sub">Earn one point per Rs 50 spent. Flip the card to see your member code — this is a loyalty card, not a payment card.</p>
+  <div class="flip-card">
+    <div class="fci">
+      <div class="fcf">
+        <div class="fc-top"><span class="fc-leaf">🌿</span><span class="fc-tier">GREEN MEMBER</span></div>
+        <div class="fc-mid">Full Life Rewards</div>
+        <div class="fc-bottom">
+          <div class="fc-points"><strong id="pointsVal">1,240</strong><span>POINTS BALANCE</span></div>
+          <div class="fc-since">MEMBER SINCE<br><strong style="color:#fff">FEB 2025</strong></div>
+        </div>
+      </div>
+      <div class="fcb">
+        <div class="fc-qr"></div>
+        <div class="fc-code">FL-REWARDS-88213</div>
+      </div>
+    </div>
+  </div>
+  <div class="loyalty-btns">
+    <button class="hbtn-p" onclick="gs('prods')">Earn points shopping</button>
+    <button class="hbtn-s" onclick="showToast('🎁 Redeem catalog coming soon!')">Redeem points</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">🌿 Full Life Store</div>
+  <div class="footer-sub">Your one-stop shop for food, pharmacy, clothes & shoes in Pakistan</div>
+  <div class="footer-links">
+    <a href="#">About us</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy policy</a>
+    <a href="#">Delivery info</a>
+    <a href="#">Returns</a>
+    <a href="#">Track order</a>
+    <a href="#">Careers</a>
+    <a href="#">Blog</a>
+  </div>
+  <div class="footer-copy">© 2026 FULL LIFE STORE · MADE IN PAKISTAN</div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h2>🧺 Your basket</h2>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total-row"><span>SUBTOTAL</span><span id="cartSubtotal">Rs 0</span></div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()" disabled>Checkout</button>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-bg" id="loginModal">
+  <div class="modal-box">
+    <h2>Log in to Full Life</h2>
+    <input class="m-input" placeholder="Email address" type="email">
+    <input class="m-input" placeholder="Password" type="password">
+    <div class="m-btns">
+      <button class="mbtn-ok" onclick="hideModal('loginModal');showToast('👋 Welcome back to Full Life!')">Log in</button>
+      <button class="mbtn-cancel" onclick="hideModal('loginModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-bg" id="checkoutModal">
+  <div class="modal-box">
+    <h2>Delivery details</h2>
+    <input class="m-input" id="coName" placeholder="Full name">
+    <div class="m-row">
+      <input class="m-input" id="coPhone" placeholder="Phone number">
+      <input class="m-input" id="coCity" placeholder="City">
+    </div>
+    <input class="m-input" id="coAddress" placeholder="Delivery address">
+    <div class="m-btns">
+      <button class="mbtn-ok" onclick="reviewOrder()">Review order</button>
+      <button class="mbtn-cancel" onclick="hideModal('checkoutModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="modal-bg" id="reviewModal">
+  <div class="modal-box">
+    <h2>Order summary</h2>
+    <div class="receipt" id="reviewReceipt"></div>
+    <div class="m-btns">
+      <button class="mbtn-ok" id="placeOrderBtn" onclick="placeOrder()">Place order</button>
+      <button class="mbtn-cancel" onclick="hideModal('reviewModal');showModal('checkoutModal')">Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<div class="modal-bg" id="confirmModal">
+  <div class="modal-box" style="text-align:center">
+    <div class="success-anim">✅</div>
+    <h2>Order placed!</h2>
+    <div class="order-no" id="orderNoTxt"></div>
+    <div class="receipt" id="confirmReceipt"></div>
+    <button class="mbtn-ok" onclick="hideModal('confirmModal')">Done</button>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
